@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Meus Filmes</string>
+    <string name="adc_filme">Adicionar Filme</string>
+    <string name="settings">Settings</string>
+    <string name="post">Post</string>
+    <string name="titulo">Título</string>
+    <string name="desc_filme">O que achou do filme ?</string>
+    <string name="val_filme">Quantas estrelas merece o filme</string>
+</resources>

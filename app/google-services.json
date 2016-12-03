@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "959218441873",
+    "firebase_url": "https://meus-filmes-e9c57.firebaseio.com",
+    "project_id": "meus-filmes-e9c57",
+    "storage_bucket": "meus-filmes-e9c57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959218441873:android:e63aeaea80151b2e",
+        "android_client_info": {
+          "package_name": "br.com.tecplus.meusfilmes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959218441873-nm9u5vjai21bo68pfu499fiqma2k8g64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlCiKrL162zwa3V5jnBHgD6mnQsagCzog"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
