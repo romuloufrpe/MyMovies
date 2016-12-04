@@ -6,4 +6,14 @@
     <string name="titulo">Título</string>
     <string name="desc_filme">O que achou do filme ?</string>
     <string name="val_filme">Quantas estrelas merece o filme</string>
+    <string name="nome">Seu nome</string>
+    <string name="email">Email...</string>
+    <string name="password">Senha...</string>
+    <string name="criar">Criar conta</string>
+    <string name="logout">Logout</string>
+    <string name="login">Entrar</string>
+    <string name="criar_conta">Crie uma conta</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="adc_name">Digite seu nome</string>
+    <string name="finalizar_setuo">Finaliza</string>
 </resources>

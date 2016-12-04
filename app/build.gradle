@@ -49,6 +49,9 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-storage:1.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.android.gms:play-services-auth:10.0.0'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'
