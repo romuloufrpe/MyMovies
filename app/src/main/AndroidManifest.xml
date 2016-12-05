@@ -26,7 +26,7 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".SetupActivity"></activity>
+        <activity android:name=".SetupActivity" android:theme="@style/AppTheme.Dark"></activity>
     </application>
 
 </manifest>

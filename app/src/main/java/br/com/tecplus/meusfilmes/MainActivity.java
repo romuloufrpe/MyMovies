@@ -68,13 +68,15 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setStackFromEnd(true);
         mBlogList.setHasFixedSize(true);
         mBlogList.setLayoutManager(new LinearLayoutManager(this));
+
+        checkUserExist();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        checkUserExist();
+
 
         mAuth.addAuthStateListener(mAuthListener);
 
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkUserExist() {
 
 
-        final String user_id = mAuth.getCurrentUser().getUid();
+         final String user_id = mAuth.getCurrentUser().getUid();
 
         mDataBaseUsers.addValueEventListener(new ValueEventListener() {
             @Override
@@ -107,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!dataSnapshot.hasChild(user_id)){
 
-                    Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                    /*Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
                     setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(setupIntent);
+                    startActivity(setupIntent);*/
 
                 }
 
