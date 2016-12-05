@@ -34,5 +34,30 @@
             android:paddingBottom="15dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp" />
+
+        <TextView
+            android:text="username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_username"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/like_btn"
+                android:src="@mipmap/ic_thumb_up_black_24dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="10dp" />
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

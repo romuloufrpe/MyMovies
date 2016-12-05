@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,9 +30,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mBlogList;
     private DatabaseReference mDataBaseReference;
     private DatabaseReference mDataBaseUsers;
+    private DatabaseReference mDataBaseLike;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private boolean mProcessLike = false;
 
 
 
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDataBaseReference = FirebaseDatabase.getInstance().getReference().child("Blog");
         mDataBaseUsers = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDataBaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
 
         mDataBaseUsers.keepSynced(true);
         mDataBaseReference.keepSynced(true);
@@ -87,11 +92,59 @@ public class MainActivity extends AppCompatActivity {
                 mDataBaseReference
         ) {
             @Override
-            protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
+            protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, final int position) {
+
+                final String post_key = getRef(position).getKey();
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
                 viewHolder.setImage(getApplicationContext(),model.getImage());
+                viewHolder.setUsername(model.getUsername());
+
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Toast.makeText(MainActivity.this,post_key,Toast.LENGTH_LONG).show();
+
+                    }
+                });
+                viewHolder.mLikeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mProcessLike = true;
+
+
+
+                            mDataBaseLike.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    if (mProcessLike) {
+
+                                        if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
+
+                                            mDataBaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+
+                                            mProcessLike = false;
+
+                                        } else {
+
+                                            mDataBaseLike.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("RandoValue");
+                                            mProcessLike = false;
+                                        }
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                    }
+                });
             }
         };
         mBlogList.setAdapter(firebaseRecyclerAdapter);
@@ -128,10 +181,14 @@ public class MainActivity extends AppCompatActivity {
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
+
+        ImageButton mLikeButton;
         public BlogViewHolder(View itemView) {
             super(itemView);
 
             mView = itemView;
+            mLikeButton = (ImageButton)mView.findViewById(R.id.like_btn);
+
         }
         public void setTitle(String title){
 
@@ -142,6 +199,11 @@ public class MainActivity extends AppCompatActivity {
         public void setDesc(String desc){
             TextView post_des = (TextView)mView.findViewById(R.id.post_desc);
             post_des.setText(desc);
+        }
+
+        public void setUsername(String username){
+            TextView post_username = (TextView)mView.findViewById(R.id.post_username);
+            post_username.setText(username);
         }
 
         public void setImage(Context ctx, String image){
