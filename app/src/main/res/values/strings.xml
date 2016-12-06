@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Meus Filmes</string>
+    <string name="app_name">Filme com Pipoca</string>
     <string name="adc_filme">Adicionar Filme</string>
     <string name="settings">Settings</string>
     <string name="post">Post</string>

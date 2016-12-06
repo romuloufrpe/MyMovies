@@ -101,12 +101,17 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.setImage(getApplicationContext(),model.getImage());
                 viewHolder.setUsername(model.getUsername());
 
+                viewHolder.setLikeBtn(post_key);
+
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        Toast.makeText(MainActivity.this,post_key,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(MainActivity.this,post_key,Toast.LENGTH_LONG).show();
+                        Intent singleBlogIntent = new Intent(MainActivity.this, BlogSingleActivity.class);
+                        singleBlogIntent.putExtra("blog_id",post_key);
+                        startActivity(singleBlogIntent);
 
                     }
                 });
@@ -183,11 +188,48 @@ public class MainActivity extends AppCompatActivity {
         View mView;
 
         ImageButton mLikeButton;
+
+        DatabaseReference mDataBaseLike;
+        FirebaseAuth mAuth;
+
         public BlogViewHolder(View itemView) {
             super(itemView);
 
             mView = itemView;
             mLikeButton = (ImageButton)mView.findViewById(R.id.like_btn);
+
+            mDataBaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
+            mAuth = FirebaseAuth.getInstance();
+
+            mDataBaseLike.keepSynced(true);
+
+        }
+
+        public void setLikeBtn(final String post_key){
+
+            mDataBaseLike.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                    if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+
+
+                        mLikeButton.setImageResource(R.mipmap.ic_favorite_black_24dp);
+
+
+                    }else {
+
+                        mLikeButton.setImageResource(R.mipmap.ic_favorite_border_black_24dp);
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
 
         }
         public void setTitle(String title){
